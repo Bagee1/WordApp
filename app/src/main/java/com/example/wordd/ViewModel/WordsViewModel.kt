@@ -24,14 +24,12 @@ class WordsViewModel(
     val uiState: StateFlow<WordsUiState> = _uiState.asStateFlow()
 
     init {
-        // Load words from database
         viewModelScope.launch {
             repository.allWords.collect { wordsList ->
                 _uiState.update { it.copy(words = wordsList) }
             }
         }
 
-        // Load display mode preference
         viewModelScope.launch {
             dataStoreManager.displayModeFlow.collect { mode ->
                 _uiState.update { it.copy(displayMode = mode) }
@@ -77,7 +75,6 @@ class WordsViewModel(
         }
     }
 
-    // Factory for creating the ViewModel with dependencies
     class Factory(
         private val application: Application,
         private val dataStoreManager: DataStoreManager

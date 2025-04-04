@@ -22,7 +22,6 @@ fun WordsScreen(
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     if (isLandscape) {
-        // Landscape layout
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -131,14 +130,12 @@ fun WordsScreen(
             }
         }
     } else {
-        // Portrait layout (your original code)
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            // Your existing portrait layout code...
             if (uiState.words.isNotEmpty()) {
                 val currentWord = uiState.words[uiState.currentIndex]
 

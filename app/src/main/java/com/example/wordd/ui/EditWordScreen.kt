@@ -14,12 +14,10 @@ fun EditWordScreen(
     viewModel: WordsViewModel,
     onSaveComplete: () -> Unit,
     onCancel: () -> Unit,
-    navController: NavController? = null  // Add NavController parameter
+    navController: NavController? = null
 ) {
-    // Get the wordId from navigation arguments if editing an existing word
     val wordId = navController?.currentBackStackEntry?.arguments?.getInt("wordId", 0) ?: 0
 
-    // Find the word if editing existing one
     val wordToEdit = remember(wordId) {
         if (wordId > 0) {
             viewModel.uiState.value.words.find { it.id == wordId }
@@ -77,14 +75,12 @@ fun EditWordScreen(
                             nativeWord = nativeWord
                         )
 
-                        // Save to database via ViewModel
                         if (wordToEdit == null) {
                             viewModel.addWord(word)
                         } else {
                             viewModel.updateWord(word)
                         }
 
-                        // Navigate back
                         onSaveComplete()
                     }
                 }
